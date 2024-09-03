@@ -38,12 +38,12 @@ const useWeather = () => {
         throw new Error(errorMessage)
       }
 
-      const data = await response.json();
+      const data = await response.json()
 
       const updateWeatherData = {
         ...weatherData,
         location: data?.name,
-        climate: data?.weatherData[0]?.main,
+        climate: data?.weather[0]?.main,
         temperature: data?.main?.temp,
         maxTemperature: data?.main?.temp_max,
         minTemperature: data?.main?.temp_min,
@@ -54,7 +54,7 @@ const useWeather = () => {
         longitude: longitude,
         latitude: latitude,
       }
-      setWeatherData(updateWeatherData);
+      setWeatherData(updateWeatherData)
     } catch (err) {
       setError(err)
     } finally {
@@ -62,29 +62,26 @@ const useWeather = () => {
         ...loading,
         state: false,
         message: '',
-      });
+      })
     }
-  };
+  }
 
   useEffect(() => {
-
     setLoading({
-        loading: true,
-        message: "Finding location..."
-    });
-
-    navigator.geolocation.getCurrentPosition(function(position){
-        
-        fetchWeatherData(position.coords.latitude, position.coords.longitude);
+      loading: true,
+      message: 'Finding location...',
     })
 
-  }, []);
+    navigator.geolocation.getCurrentPosition(function (position) {
+      fetchWeatherData(position.coords.latitude, position.coords.longitude)
+    })
+  }, [])
 
   return {
     weatherData,
     error,
     loading,
   }
-};
+}
 
-export default useWeather;
+export default useWeather
