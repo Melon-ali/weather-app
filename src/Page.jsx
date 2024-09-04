@@ -47,7 +47,7 @@ const Page = () => {
   return (
     <>
       {loading.state ? (
-        <div className="flex bg-gray-200 rounded-md w-96 mt-14 mx-auto">
+        <div className="flex bg-gray-200 rounded-md w-96 p-8 mt-14 mx-auto">
           <p className="text-center text-3xl text-black">{loading.message}</p>
         </div>
       ) : (
